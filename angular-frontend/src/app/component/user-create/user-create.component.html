@@ -27,7 +27,7 @@
         Back to Users List
       </button>
       <p class="alert alert-success mt-3" *ngIf="feedback.msg">
-        {{ feedback.msg }}
+        [innerHTML]="feedback.msg"
       </p>
     </fieldset>
   </form>

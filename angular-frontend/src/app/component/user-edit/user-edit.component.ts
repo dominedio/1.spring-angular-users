@@ -58,8 +58,8 @@ export class UserEditComponent implements OnInit {
           (this.feedback = { type: 'success', msg: 'Successfully updated!' })
         },
       error: (err) => {
-        this.feedback.msg = err?.error.message;
-        this.feedback.type = err?.error.status;
+        this.feedback.msg = err.error.message;
+        this.feedback.type = err.error.status;
       }
       });
     this.timeoutId = setTimeout(() => {
@@ -80,8 +80,8 @@ export class UserEditComponent implements OnInit {
         });
       },
       error: (err) => {
-        this.feedback.msg = err?.error.message;
-        this.feedback.type = err?.error.status;
+        this.feedback.msg = err.error.message;
+        this.feedback.type = err.error.status;
       }
     });
   }

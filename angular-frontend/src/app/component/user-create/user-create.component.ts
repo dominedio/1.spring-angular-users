@@ -44,8 +44,13 @@ export class UserCreateComponent implements OnInit {
     })
       .subscribe({
         error: (err) => {
-          this.feedback.msg = err.error?.message;
-          this.feedback.type = err.error?.status;
+          this.feedback = { type: 'error', msg: err.error.message };
+          if (err.error.errors) {
+            this.feedback.msg = this.feedback.msg + '<br>Errors:<br>';
+            err.error.errors.map((error) => {
+              this.feedback.msg = this.feedback.msg + error.message + '<br>';
+            });
+          }
         },
         complete: () => (
           (this.feedback = {
@@ -55,10 +60,7 @@ export class UserCreateComponent implements OnInit {
           (this.isLoading = false)
         ),
       });
-    this.createUserForm.reset();
-    if (window.confirm('Do you want to return to user list?')) {
-      this.router.navigate(['./user-list']);
-    }
+
     this.timeoutId = setTimeout(() => {
       this.feedback = { type: '', msg: '' };
     }, 3000);

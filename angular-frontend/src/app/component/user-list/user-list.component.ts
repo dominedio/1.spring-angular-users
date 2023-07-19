@@ -32,8 +32,8 @@ export class UserListComponent implements OnInit {
         console.log(res);
       },
       error: (err) => {
-        this.msg = err?.error.message;
-        this.status = err?.error.status;
+        this.msg = err.error.message;
+        this.status = err.error.status;
       }
     })
   }
