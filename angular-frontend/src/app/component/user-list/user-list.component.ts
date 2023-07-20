@@ -24,10 +24,9 @@ export class UserListComponent implements OnInit {
   }
 
   fetchusers() {
-
     this.userapi.getusers(this.pagination, this.size).subscribe({    
       next: (res: any) => {
-        //debugger;
+        
         this.users = res.users;
         this.users_number=res.count;
         console.log(res);

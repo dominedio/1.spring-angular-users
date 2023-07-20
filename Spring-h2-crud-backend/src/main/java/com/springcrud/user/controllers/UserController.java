@@ -51,17 +51,18 @@ public class UserController {
 	}
 
 	@GetMapping("/users")
-	public ResponseEntity<Object> getUsers(@RequestParam int pages,@RequestParam int size) throws ResourceNotFoundException{
+	public ResponseEntity<Object> getUsers(@RequestParam("page") int pages, @RequestParam("size") int size)
+			throws ResourceNotFoundException {
 		Pageable page = PageRequest.of(pages, size, Sort.by("name").descending());
 		Page<User> pagedResult = userRepo.findAll(page);
 		Map<String, Object> responseBody = new LinkedHashMap<>();
-		 responseBody.put("users",pagedResult.getContent() );
-		 responseBody.put("count",userRepo.count() );
+		responseBody.put("users", pagedResult.getContent());
+		responseBody.put("count", userRepo.count());
 		if (pagedResult.hasContent()) {
 			return new ResponseEntity<>(responseBody, HttpStatus.OK);
-		 } else {
+		} else {
 			throw new ResourceNotFoundException("Users not found in the database");
-		}		
+		}
 	}
 	
 	@GetMapping("/users/{id}")

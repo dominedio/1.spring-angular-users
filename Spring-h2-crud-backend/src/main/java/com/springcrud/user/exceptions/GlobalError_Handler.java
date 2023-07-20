@@ -30,15 +30,16 @@ public class GlobalError_Handler extends ResponseEntityExceptionHandler{
 	private boolean printStackTrace;
 
 	@Override
-	@ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+	@ResponseStatus(HttpStatus.CONFLICT)
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		ErrorResponse errorResponse = new ErrorResponse( new Date(),HttpStatus.UNPROCESSABLE_ENTITY.value(),
+		ErrorResponse errorResponse = new ErrorResponse( new Date(),HttpStatus.CONFLICT.value(),
 				"Validation error. Check 'errors' field for details.");
 		for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
 			errorResponse.addValidationError(fieldError.getField(), fieldError.getDefaultMessage());
 		}
-		return ResponseEntity.unprocessableEntity().body(errorResponse);
+		//return ResponseEntity.unprocessableEntity().body(errorResponse);
+		return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(errorResponse);
 	}
 
 	@ExceptionHandler(NoSuchElementFoundException.class)
