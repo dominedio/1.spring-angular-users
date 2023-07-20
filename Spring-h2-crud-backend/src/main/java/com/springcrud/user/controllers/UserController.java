@@ -51,7 +51,7 @@ public class UserController {
 	}
 
 	@GetMapping("/users")
-	public ResponseEntity<Object> getUsers(@RequestParam Integer pages,Integer size) throws ResourceNotFoundException{
+	public ResponseEntity<Object> getUsers(@RequestParam int pages,@RequestParam int size) throws ResourceNotFoundException{
 		Pageable page = PageRequest.of(pages, size, Sort.by("name").descending());
 		Page<User> pagedResult = userRepo.findAll(page);
 		Map<String, Object> responseBody = new LinkedHashMap<>();
@@ -83,7 +83,7 @@ public class UserController {
 			return ResponseEntity.ok().body(user);
 	}
 
-	@PostMapping(path = "/users", consumes = "application/json")
+	@PostMapping(path = "/users/create", consumes = "application/json")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public User postUser(@Valid @RequestBody User user) {
 		return userRepo.save(user);

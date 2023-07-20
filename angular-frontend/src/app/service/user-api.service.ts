@@ -12,7 +12,7 @@ export class UserApiService {
   baseUrl: string = 'http://localhost:8080/spring-rest-api/users';
 
   getusers(page: number,size :number):Observable<any>{
-    return this.httpclient.get<any>(this.baseUrl+'?page'+(page-1)+'&size'+size)
+    return this.httpclient.get<any>(this.baseUrl+'?page='+(page)+'&size='+size)
     //.pipe( catchError((err)=> throwError(err))
     //);
   }
@@ -22,21 +22,22 @@ export class UserApiService {
   }
 
   public postuser(User: user): Observable<any> {
-    const headers = { 'content-type': 'application/json' };
+    const headers = { 'Content-Type': 'application/json'}
     const body = JSON.stringify(User);
+    //const body = {"name":"prova"}
     return this.httpclient
       .post<user>(`${this.baseUrl}/create`, body, { headers: headers });
   }
 
   public putuser(id: string, User: user): Observable<any> {
-    const headers = { 'content-type': 'application/json' };
+    const headers = { 'Content-Type': 'application/json' };
     const body = JSON.stringify(User);
     return this.httpclient
       .put<user>(`${this.baseUrl}/put/${id}`, body, { headers: headers });
   }
 
   public deleteuser(id: string): Observable<any> {
-    const headers = { 'content-type': 'application/json' };
+    const headers = { 'Content-Type': 'application/json' };
     return this.httpclient
       .delete<user>(`${this.baseUrl}/delete/${id}`, { headers: headers });
   }
