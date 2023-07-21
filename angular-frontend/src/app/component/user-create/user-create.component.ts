@@ -61,9 +61,9 @@ export class UserCreateComponent implements OnInit {
         ),
       });
 
-    this.timeoutId = setTimeout(() => {
-      this.feedback = { type: '', msg: '' };
-    }, 3000);
+   // this.timeoutId = setTimeout(() => {
+    //  this.feedback = { type: '', msg: '' };
+   // }, 3000);
   }
 
   get name(): FormControl {

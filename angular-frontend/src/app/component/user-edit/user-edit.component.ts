@@ -58,16 +58,18 @@ export class UserEditComponent implements OnInit {
           (this.feedback = { type: 'success', msg: 'Successfully updated!' })
         },
       error: (err) => {
-        this.feedback.msg = err.error.message;
-        this.feedback.type = err.error.status;
+        this.feedback = { type: 'error', msg: err.error.message };
+        if (err.error.errors) {
+          this.feedback.msg = this.feedback.msg + '<br>Errors:<br>';
+          err.error.errors.map((error) => {
+            this.feedback.msg = this.feedback.msg + error.message + '<br>';
+          });
+        }
       }
       });
     this.timeoutId = setTimeout(() => {
       this.feedback = { type: '', msg: '' };
     }, 3000);
-    if (window.confirm('Do you want to return to user list?')) {
-      this.onBack();
-    }
   }
 
   getProduct(id: string) {
@@ -80,8 +82,13 @@ export class UserEditComponent implements OnInit {
         });
       },
       error: (err) => {
-        this.feedback.msg = err.error.message;
-        this.feedback.type = err.error.status;
+        this.feedback = { type: 'error', msg: err.error.message };
+        if (err.error.errors) {
+          this.feedback.msg = this.feedback.msg + '<br>Errors:<br>';
+          err.error.errors.map((error) => {
+            this.feedback.msg = this.feedback.msg + error.message + '<br>';
+          });
+        }
       }
     });
   }

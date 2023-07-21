@@ -42,4 +42,15 @@ export class UserListComponent implements OnInit {
     this.pagination = event;
     this.fetchusers();
   }
+
+  onDelete(id:string){
+    if (window.confirm('Are you suru want delete this known user?')){
+      this.userapi.deleteuser(id).subscribe({
+        complete:()=>{
+          this.fetchusers()
+        }
+      })
+    }
+    else return;
+  }
 }

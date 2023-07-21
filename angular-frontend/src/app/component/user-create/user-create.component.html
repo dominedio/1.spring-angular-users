@@ -23,11 +23,11 @@
           Create
         </button>
       </div>
-      <button class="btn btn-outline-primary mt-3 ms-2" (click)="onBack()">
+      <button class="btn btn-outline-primary mt-3 ms-2" 
+      routerLink="/user-list">
         Back to Users List
       </button>
-      <p class="alert alert-success mt-3" *ngIf="feedback.msg" [innerHTML]="feedback.msg">
-        
+      <p class="alert alert-success mt-3" *ngIf="feedback.msg" [innerHTML]="feedback.msg">  
       </p>
     </fieldset>
   </form>

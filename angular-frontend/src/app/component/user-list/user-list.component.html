@@ -23,6 +23,16 @@
         <td scope="row">{{ user.id }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
+        <td class="text-center">
+          <div class="btn-group">
+            <button class="btn btn-outline-success"
+            [routerLink]="['/user-edit',user.id]">Edit</button>
+            <button class="btn btn-outline-danger"
+            (click)="onDelete(user,id)"
+            type="button"
+            >Delete</button>
+          </div>          
+        </td>
       </tr>
     </tbody>
   </table>

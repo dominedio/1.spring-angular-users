@@ -33,7 +33,7 @@ export class UserApiService {
     const headers = { 'Content-Type': 'application/json' };
     const body = JSON.stringify(User);
     return this.httpclient
-      .put<user>(`${this.baseUrl}/put/${id}`, body, { headers: headers });
+      .put<user>(`${this.baseUrl}/${id}/put`, body, { headers: headers });
   }
 
   public deleteuser(id: string): Observable<any> {
